@@ -7,14 +7,6 @@ public class Trie {
 
     static TrieNode root = new TrieNode();
 
-    public static void main(String[] args) {
-        insert("hello");
-        System.out.println(search("hellone"));
-        insert("hellone");
-        System.out.println(startWith("hel"));
-        System.out.println(search("hellone"));
-    }
-
     private static class TrieNode {
 
         Map<Character, TrieNode> children = new HashMap<>();

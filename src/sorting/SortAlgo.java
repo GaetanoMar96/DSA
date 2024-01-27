@@ -1,6 +1,8 @@
 package sorting;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SortAlgo {
 
@@ -35,6 +37,34 @@ public class SortAlgo {
             }
             nums[j+1] = key;
         }
+    }
+
+    /**
+     * Perform a quick sort, find a pivot, call the method recursively onf left and right
+     * and then merge the 2 portions together
+     * @param nums array to sort
+     */
+    public static int[] quickSort(int[] nums) {
+        if (nums.length <= 1) {
+            return nums;
+        }
+        int pivot = nums[0];
+        List<Integer> left = new ArrayList<>();
+        List<Integer> right = new ArrayList<>();
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < pivot) {
+                left.add(nums[i]);
+            } else {
+                right.add(nums[i]);
+            }
+        }
+        int[] sortedleft = quickSort(left.stream().mapToInt(v->v).toArray());
+        int[] sortedright = quickSort(right.stream().mapToInt(v->v).toArray());
+        int[] sorted = new int[sortedleft.length + 1 + sortedright.length];
+        System.arraycopy(sortedleft, 0, sorted, 0, sortedleft.length);
+        sorted[sortedleft.length] = pivot;
+        System.arraycopy(sortedright, 0, sorted, sortedleft.length + 1, sortedright.length);
+        return sorted;
     }
 
     /**

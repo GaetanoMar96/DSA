@@ -1,5 +1,6 @@
 package assessment;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -43,5 +44,29 @@ public class AssessmentTest {
             List<Integer> result = resultList.get(i);
             assertArrayEquals(expected[i], result.toArray());
         }
+    }
+
+    @Test
+    void searchWordTrue() {
+        char[][] matrix = {
+                {'A', 'B', 'C', 'E'},
+                {'S', 'F', 'C', 'S'},
+                {'A', 'D', 'E', 'E'}
+        };
+        String word = "ABCCE";
+        WordSearch wordSearch = new WordSearch();
+        Assertions.assertTrue(wordSearch.exist(matrix, word));
+    }
+
+    @Test
+    void searchWordFalse() {
+        char[][] matrix = {
+                {'A', 'B', 'C', 'E'},
+                {'S', 'F', 'C', 'S'},
+                {'A', 'D', 'E', 'E'}
+        };
+        String word = "FAB";
+        WordSearch wordSearch = new WordSearch();
+        Assertions.assertFalse(wordSearch.exist(matrix, word));
     }
 }

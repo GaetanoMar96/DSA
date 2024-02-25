@@ -4,10 +4,9 @@ import java.util.*;
 
 public class Dijkstra {
 
-    static Map<Character, Map<Character, Integer>> adj = new HashMap<>();
+    private final Map<Character, Map<Character, Integer>> adj = new HashMap<>();
 
-    public static void main(String[] args) {
-        String source = "abcd", target = "acbe";
+    public int returnTotalCost(String source, String target) {
         Character[] original = {'a','b','c','c','e','d'};
         Character[] changed = {'b','c','b','e','b','e'};
         int[] cost = {2,5,5,1,2,20};
@@ -31,17 +30,7 @@ public class Dijkstra {
                 break;
             total += path;
         }
-        System.out.println(total);
-    }
-
-    private static class Pair {
-        Character node;
-        int cost;
-
-        Pair(Character node, int cost) {
-            this.node = node;
-            this.cost = cost;
-        }
+        return total;
     }
 
     /**
@@ -52,14 +41,14 @@ public class Dijkstra {
      * @param target ending node
      * @return minimum total cost
      */
-    public static int findShortestPath(Character source, Character target) {
-        PriorityQueue<Pair> pq = new PriorityQueue<>(
+    public int findShortestPath(Character source, Character target) {
+        PriorityQueue<Pair<Character>> pq = new PriorityQueue<>(
                 Comparator.comparingInt(pair -> pair.cost)
         );
-        pq.add(new Pair(source, 0));
+        pq.add(new Pair<>(source, 0));
         Set<Character> visited = new HashSet<>();
         while(!pq.isEmpty()) {
-            Pair pair = pq.poll();
+            Pair<Character> pair = pq.poll();
             if (Objects.equals(pair.node, target)) {
                 return pair.cost;
             }
@@ -68,7 +57,7 @@ public class Dijkstra {
             visited.add(pair.node);
             for (Map.Entry<Character, Integer> entry : adj.get(pair.node).entrySet()) {
                 if (!visited.contains(entry.getKey())) {
-                    pq.add(new Pair(entry.getKey(), entry.getValue() + pair.cost));
+                    pq.add(new Pair<>(entry.getKey(), entry.getValue() + pair.cost));
                 }
             }
         }

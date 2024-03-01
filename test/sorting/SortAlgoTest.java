@@ -24,6 +24,14 @@ public class SortAlgoTest {
     }
 
     @Test
+    void bubbleSortOk() {
+        int[] nums = {12,5,7,1,4,7,6,8,9,10};
+        int[] sortedNums = getSortedNums(nums);
+        SortAlgo.bubbleSort(nums);
+        Assertions.assertArrayEquals(sortedNums, nums);
+    }
+
+    @Test
     void quickSortOk() {
         int[] nums = {12,5,7,1,4,7,6,8,9,10};
         int[] sortedNums = getSortedNums(nums);

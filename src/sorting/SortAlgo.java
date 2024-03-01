@@ -40,6 +40,22 @@ public class SortAlgo {
     }
 
     /**
+     * last i elements are already sorted, sort the remaining
+     * @param nums array to sort
+     */
+    public static void bubbleSort(int[] nums) {
+        for(int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length - i -1; j++) {
+                if(nums[j] > nums[j+1]) {
+                    int temp = nums[j+1];
+                    nums[j+1] = nums[j];
+                    nums[j] = temp;
+                }
+            }
+        }
+    }
+
+    /**
      * Perform a quick sort, find a pivot, call the method recursively onf left and right
      * and then merge the 2 portions together
      * @param nums array to sort
